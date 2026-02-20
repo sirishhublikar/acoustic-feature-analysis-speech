@@ -18,18 +18,15 @@ By extracting multiple acoustic features and clustering them with K-means, this 
 
 **Emo-DB** - German emotional speech dataset with seven emotion classes.
 
-**DAIS** - Dutch articulated vowel dataset with five vowel classes: aa, ee, ie, oe, oo.
+**DAIS** -  Delft Database of EEG Recordings of Dutch Articulated and Imagined Speech with five vowel cases: aa, ee, ie, oe, oo.
 
 ## Feature Extraction
 
-Acoustic features were extracted using openSMILE (eGeMAPSv02 feature set).
+Acoustic features were extracted using the Geneva Minimalistic Acoustic Parameter Set (GeMAPS). It is a compact, theory-driven feature set designed for affective speech analysis. Instead of thousands of brute-force features, it selects a small number of physiologically meaningful descriptors with strong empirical support.
+The goal is to maintain interpretability while achieving competitive performance with a minimal parameter set. More information about GeMAPS can be found [here](https://sail.usc.edu/publications/files/eyben-preprinttaffc-2015.pdf)
 
-Analyzed features:
-
-* Pitch (F0 semitone)
-* Jitter
-* Loudness
-* MFCCs
+From the available GeMAPS features, four were analyzed in this study: pitch (F0 semitone), jitter, loudness, and MFCC.
+Pitch and loudness represent prosodic information, jitter captures voice quality, and MFCCs represent spectral envelope characteristics linked to vocal tract configuration. This allows us to directly compare how different acoustic layers contribute to emotion and vowel separation.
 
 Frame-level features were aggregated to utterance-level representations using mean statistics.
 All features were standardized prior to clustering.
@@ -82,6 +79,6 @@ Combining all features increased purity (~0.63), confirming that vowel identity 
 
 ## Conclusion
 
-Different acoustic features capture different layers of information in speech. Selecting appropriate features requires understanding both the physical origin of the feature and the target speech processing task.
+The experiments show that acoustic feature effectiveness is task-dependent. Prosodic features such as pitch and loudness provide moderate structure for emotion-related clustering, while spectral features, particularly MFCCs, achieve stronger separation for vowel classification. In contrast, jitter showed limited discriminative power in both tasks.
 
-This study connects speech production theory with empirical feature evaluation in an unsupervised setting.
+Although K-means clustering reveals underlying acoustic structure, noticeable cluster overlap indicates that single features are insufficient for clean semantic separation.
